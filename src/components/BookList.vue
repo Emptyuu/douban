@@ -1,17 +1,20 @@
 <template>
   <div id="bookList">
-    <div class="tit">
+    <!-- <div class="tit">
       <h3>{{title}}</h3>
       <router-link tag="span" :to="this.to">更多</router-link>
-    </div>
+    </div>-->
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div v-for="item in list" :key="item.id" class="swiper-slide">
           <img :src="item.imgUrl" width="100px" />
           <p>{{item.title}}</p>
-          <div class="rating">
+          <div class="rating" v-if="type==1">
             <van-rate :value="item.rating/2" size="10" gutter="1" />
             {{item.rating.toFixed(1)}}
+          </div>
+          <div class="money" v-else>
+            ￥{{item.money}}
           </div>
         </div>
       </div>
@@ -22,16 +25,14 @@
 <script>
 import Swiper from "swiper";
 import "swiper/css/swiper.css";
+// import TitleBar from './TitleBar';
 export default {
   props: {
-    to: {
-      type: String
-    },
-    title: {
-      type: String
-    },
     list: {
       type: Array
+    },
+    type: {
+      type: Number
     }
   },
   watch: {
@@ -60,18 +61,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#bookList {
-  padding: 0 15px;
-  .tit {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 50px;
-    span {
-      color: #42bd56;
-    }
-  }
+#bookList{
+  margin: 10px 0;
 }
+
 .swiper-wrapper {
   text-align: center;
   img {
@@ -81,13 +74,17 @@ export default {
   }
   p {
     margin: 5px 0;
-    white-space: nowrap; /*超出的空白区域不换行*/
-    overflow: hidden; /*超出隐藏*/
-    text-overflow: ellipsis; /*文本超出显示省略号*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 .rating {
   font-size: 10px;
+  color: #999;
+}
+.money{
+  font-size: 12px;
   color: #999;
 }
 </style>

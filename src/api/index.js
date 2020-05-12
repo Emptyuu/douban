@@ -26,3 +26,16 @@ export const getNofictionBook = () => {
         }
     })
 }
+// https://m.douban.com/rexxar/api/v2/subject_collection/market_product_book_mobile_web/items?os=ios&callback=jsonp3&start=0&count=8&loc_id=0&_=1589268023105
+export const getInfoBook = () => {
+    return axios.get("rexxar/api/v2/subject_collection/market_product_book_mobile_web/items", {
+        params: {
+            'os': 'ios',
+            // 'callback': 'jsonp1',
+            'start': '0',
+            'count': '8',
+            'loc_id': '0',
+            '_': Date.now()
+        }
+    })
+}
